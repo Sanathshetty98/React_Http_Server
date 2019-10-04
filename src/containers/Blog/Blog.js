@@ -8,7 +8,8 @@ import './Blog.css';
 class Blog extends Component {
     state = {
         posts: [],
-        selectedPost:null
+        selectedPost:null,
+        error: false
     }
     componentDidMount(){
         axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -23,12 +24,17 @@ class Blog extends Component {
                     this.setState({posts : updatedPosts});
                  //console.log(response);
              })
+             .catch(error => {
+                 this.setState( {error:true} )
+             })
     }
     postSelectedHandler = (id) => {
         this.setState( { selectedPost:id } );
     }
     render () {
-        const posts = this.state.posts.map(
+        let posts=<p style = {{textAlign:'center'}}> Something went wrong!</p>
+        if(!this.state.error){
+        posts = this.state.posts.map(
             post => {
                 return <Post 
                 key={post.id} 
@@ -37,6 +43,7 @@ class Blog extends Component {
                 clicked={ () => this.postSelectedHandler(post.id)}/>
             }
         );
+        }
         return (
             <div>
                 <section className="Posts">
