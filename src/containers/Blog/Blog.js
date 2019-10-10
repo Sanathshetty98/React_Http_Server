@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Blog.css';
 import Posts from './Posts/Posts';
-import {Route, NavLink, Switch, Redirect} from 'react-router-dom';
+import {Route, NavLink, Switch, /*Redirect*/} from 'react-router-dom';
 import asyncComponent from '../../hoc/asyncComponent';
 
 const AsyncNewPost = asyncComponent( () => {
@@ -35,7 +35,7 @@ class Blog extends Component {
                 </header>
                 {/*
                 <Route path="/" exact render={ () => <h1> Home </h1>} />
-                <Route path="/"  render={ () => <h1> Home 2 </h1>} />*/}
+                <Route path="/"  render={ () => <h1> Home 2 </h1>} /> //this is how we should comment jsx*/}
             <Switch>
             { this.state.auth ? <Route path="/new-post" exact component={AsyncNewPost}/> : null}
             <Route path="/posts" component={Posts}/>
